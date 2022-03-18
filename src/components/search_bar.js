@@ -4,7 +4,7 @@ class SearchBar extends Component {
 
     constructor(props) { 
         super(props);
-        this.state = { term: 'Starting value' };
+        this.state = { term: props.searchTerm, searchTerm: props.onSearchTermChange };
     }
 
     render() { 
@@ -14,9 +14,13 @@ class SearchBar extends Component {
                     value={this.state.term}
                     onChange={event => this.onInputChange(event.target.value)}
                     placeholder="Search for videos" />
-                Value of the input: { this.state.term }
             </div>
         );
+    }
+
+    onInputChange(eventData) {
+        this.setState({ term: eventData });
+        this.state.searchTerm(eventData);
     }
 }
 
